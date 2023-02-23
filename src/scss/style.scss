@@ -1,6 +1,30 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-align: center;
+}
+
+body {
+    background-color: black;
+
+    a {
+        text-decoration: none !important;
+        border: none !important;
+        color: white;
+    }
+}
+
+@keyframes bounce {
+
+    from,
+    to {
+        bottom: 50%;
+        height: 50px;
+    }
+
+    80% {
+        top: calc(50% + 10px);
+        height: 50px;
+    }
 }

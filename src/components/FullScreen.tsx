@@ -7,7 +7,7 @@ import { ThirdScreen } from "../screens/screen-3"
 export const FullScreen:FC = () => {
   return (
     <>
-     <FirstScreen />
+     <FirstScreen  />
       <SecondScreen />
       <ThirdScreen />
     </>

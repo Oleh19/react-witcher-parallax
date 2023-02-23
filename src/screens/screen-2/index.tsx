@@ -1,5 +1,8 @@
+import { motion } from 'framer-motion';
 import { FC } from 'react';
+import { FaInfoCircle } from 'react-icons/fa';
 import { Parallax } from 'react-parallax';
+import { Link } from 'react-router-dom';
 import bg from '../../assets/image/screen-2/layer-back.jpg';
 import front from '../../assets/image/screen-2/layer-front.png';
 import hero1 from '../../assets/image/screen-2/layer-gera.png';
@@ -11,7 +14,20 @@ export const SecondScreen: FC = () => {
       <Parallax strength={100} bgImage={front}>
         <Parallax strength={200} bgImage={hero1}>
           <Parallax strength={300} bgImage={hero2}>
-            <div className="content"></div>
+            <div className="content" id="secondScreen">
+              <Link to="/hunt">
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                  }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 1.5 }}>
+                  <motion.div>
+                    <FaInfoCircle className="icon" />
+                  </motion.div>
+                </motion.div>
+              </Link>
+            </div>
           </Parallax>
         </Parallax>
       </Parallax>
