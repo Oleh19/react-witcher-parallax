@@ -1,41 +1,46 @@
 import { motion } from 'framer-motion';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { IoChevronBackSharp } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import bg from '../assets/image/screen-2/layer-back.jpg';
 import fiend from '../assets/image/hunt/fiend.webp';
 import leshy from '../assets/image/hunt/leshy.webp';
 import protofleder from '../assets/image/hunt/protofleders.webp';
-
-interface IMonsters {
-  name: string;
-  price: number;
-  image: string;
-  danger: string;
-}
+import { IMonsters } from './types';
+import { useAppDispatch } from '../redux/hooks';
+import { addHunt } from '../redux/slice/huntSlice';
 
 const monsters: IMonsters[] = [
   {
-    name: 'Fiend',
+    id: 1,
+    title: 'Fiend',
     price: 100,
     image: fiend,
-    danger: '7/10',
+    count: 1,
   },
   {
-    name: 'Leshy',
+    id: 2,
+    title: 'Leshy',
     price: 100,
     image: leshy,
-    danger: '7/10',
+    count: 1,
   },
   {
-    name: 'Protofleder',
+    id: 3,
+    title: 'Protofleder',
     price: 100,
     image: protofleder,
-    danger: '7/10',
+    count: 1,
   },
 ];
 
 export const Hunt: FC = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="wrapper">
       <img src={bg} alt="background" className="background" />
@@ -89,17 +94,31 @@ export const Hunt: FC = () => {
         className="hunt-box">
         <div className="hunt-container">
           <div className="hunt-items">
-            {monsters.map((monster, index) => (
-              <div key={index} className="hunt-item">
-               <Link to='/'>
-               <img className="hunt-image" src={monster.image} alt={monster.name} />
-               </Link>
+            {monsters.map((monster) => (
+              <div key={monster.id} className="hunt-item">
+                <Link to="/">
+                  <img className="hunt-image" src={monster.image} alt={monster.title} />
+                </Link>
                 <div className="hunt-bottom">
                   <Link to="#">
-                    <span className="hunt-title">{monster.name}</span>
+                    <span className="hunt-title">{monster.title}</span>
                   </Link>
                   <span className="hunt-price">{monster.price} florens</span>
-                  <button className="buy-hunt">Buy</button>
+                  <button
+                    onClick={() =>
+                      dispatch(
+                        addHunt({
+                          id: monster.id,
+                          price: monster.price,
+                          title: monster.title,
+                          image: monster.image,
+                          count: monster.count,
+                        }),
+                      )
+                    }
+                    className="buy-hunt">
+                    Buy
+                  </button>
                 </div>
               </div>
             ))}

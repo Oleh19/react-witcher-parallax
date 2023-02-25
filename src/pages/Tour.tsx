@@ -8,42 +8,58 @@ import kaerMorhen from '../assets/image/tours/kaerMorhen.jpeg';
 import kaerTrolde from '../assets/image/tours/kaerTrolde.png';
 import velen from '../assets/image/tours/velen.webp';
 import { Link } from 'react-router-dom';
-
-interface ITours {
-  title: string;
-  price: number;
-  image: string;
-}
+import { ITours } from './types';
+import { useAppDispatch } from '../redux/hooks';
+import { addTour } from '../redux/slice/tourSlice';
 
 const tours: ITours[] = [
   {
+    id: 9,
     title: 'Toussaint',
     price: 190,
     image: toussaint,
+    count: 1,
   },
   {
+    id: 10,
     title: 'Oxenfurt',
     price: 200,
     image: oxenfurt,
+    count: 1,
   },
   {
+    id: 11,
     title: 'Kaer Morhen',
     price: 210,
     image: kaerMorhen,
+    count: 1,
   },
   {
+    id: 12,
     title: 'Kaer Trolde',
     price: 220,
     image: kaerTrolde,
+    count: 1,
   },
   {
+    id: 13,
     title: 'Velen',
     price: 230,
     image: velen,
+    count: 1,
+  },
+  {
+    id: 14,
+    title: 'Velen',
+    price: 230,
+    image: velen,
+    count: 1,
   },
 ];
 
 export const Tour: FC = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <div className="wrapper">
       <img src={bg} alt="background" className="background" />
@@ -97,17 +113,31 @@ export const Tour: FC = () => {
         className="tour-box">
         <div className="tour-container">
           <div className="tour-items">
-            {tours.map((tour, index) => (
-              <div key={index} className="tour-item">
-              <Link to='/'>
-              <img className="tour-image" src={tour.image} alt="background" />
-              </Link>
+            {tours.map((tour) => (
+              <div key={tour.id} className="tour-item">
+                <Link to="/">
+                  <img className="tour-image" src={tour.image} alt="background" />
+                </Link>
                 <div className="tour-bottom">
-                  <Link to='#'>
-                  <span className="tour-title">{tour.title}</span>
+                  <Link to="#">
+                    <span className="tour-title">{tour.title}</span>
                   </Link>
                   <span className="tour-price">{tour.price} florens</span>
-                  <button className="buy-tour">Buy</button>
+                  <button
+                    onClick={() =>
+                      dispatch(
+                        addTour({
+                          id: tour.id,
+                          price: tour.price,
+                          title: tour.title,
+                          image: tour.image,
+                          count: tour.count,
+                        }),
+                      )
+                    }
+                    className="buy-tour">
+                    Add to Cart
+                  </button>
                 </div>
               </div>
             ))}

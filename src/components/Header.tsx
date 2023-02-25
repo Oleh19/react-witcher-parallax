@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { FC } from 'react';
+import { FaCartPlus } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const FirstNavMenu = [
   {
@@ -14,10 +16,13 @@ const FirstNavMenu = [
     name: 'Witcher',
     link: '#thirdScreen',
   },
+  {
+    name: 'Cart',
+    link: '#thirdScreen',
+  },
 ];
 
 export const Header: FC = () => {
-  
   return (
     <motion.header
       initial={{
@@ -35,11 +40,17 @@ export const Header: FC = () => {
       className="header">
       <div className="nav-container">
         <div className="nav">
-          {FirstNavMenu.map((item, index) => (
-            <a href={item.link}>
-              <div key={index}>{item.name}</div>
-            </a>
-          ))}
+          {FirstNavMenu.map((item, index) =>
+            item.name === 'Cart' ? (
+              <Link key={index} to="/cart" className="cart">
+                <FaCartPlus />
+              </Link>
+            ) : (
+              <a key={index} href={item.link}>
+                <div>{item.name}</div>
+              </a>
+            ),
+          )}
         </div>
       </div>
     </motion.header>

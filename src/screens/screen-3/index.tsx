@@ -15,8 +15,7 @@ export const ThirdScreen: FC = () => {
         <Parallax strength={200} bgImage={ciri}>
           <Parallax strength={200} bgImage={font}>
             <div className="content">
-              <motion.a
-                href="https://app.netlify.com/teams/oleh19/overview"
+              <motion.div
                 initial={{
                   opacity: 0,
                 }}
@@ -26,7 +25,7 @@ export const ThirdScreen: FC = () => {
                 <Link to="/witcher">
                   <FaInfoCircle className="icon" />
                 </Link>
-              </motion.a>
+              </motion.div>
             </div>
           </Parallax>
         </Parallax>
